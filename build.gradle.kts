@@ -1,7 +1,4 @@
 
-group = "org.orca.trulysharedprefs"
-version = "1.0.0-SNAPSHOT"
-
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
