@@ -36,6 +36,11 @@ android {
     namespace = "org.orca.trulysharedprefs"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
+    defaultConfig {
+        minSdk = libs.versions.android.minSdk.get().toInt()
+        targetSdk = libs.versions.android.compileSdk.get().toInt()
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
