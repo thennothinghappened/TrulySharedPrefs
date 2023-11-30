@@ -1,11 +1,11 @@
 
 group = "org.orca.trulysharedprefs"
-version = "1.0.0"
+version = "1.0.1"
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
-    `maven-publish`
+    id("maven-publish")
 }
 
 kotlin {
@@ -15,6 +15,8 @@ kotlin {
                 jvmTarget = "1.8"
             }
         }
+
+        publishLibraryVariants("release", "debug")
     }
 
     jvm("desktop")
