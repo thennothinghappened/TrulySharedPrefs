@@ -1,22 +1,10 @@
-plugins {
-    kotlin("jvm") version "1.9.21"
-}
 
 group = "org.orca.trulysharedprefs"
-version = "1.0-SNAPSHOT"
+version = "1.0.0-SNAPSHOT"
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testImplementation(kotlin("test"))
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-
-kotlin {
-    jvmToolchain(8)
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.jetbrains.compose) apply false
 }
