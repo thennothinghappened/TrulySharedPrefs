@@ -1,6 +1,6 @@
 
 group = "org.orca.trulysharedprefs"
-version = "1.0.1"
+version = "1.1.0"
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
