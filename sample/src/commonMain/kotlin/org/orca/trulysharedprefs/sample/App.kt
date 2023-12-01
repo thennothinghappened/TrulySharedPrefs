@@ -6,11 +6,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.orca.trulysharedprefs.SharedPrefs
+import org.orca.trulysharedprefs.ISharedPrefs
 
 object PrefsSchema {
     const val EXAMPLE_STRING_KEY = "example_string"
-    val EXAMPLE_STRING_DEF: String? = null
+    const val EXAMPLE_STRING_DEF = "example string!"
     const val EXAMPLE_STRING_NAME = "Example String"
 
     const val EXAMPLE_BOOLEAN_KEY = "example_boolean"
@@ -19,7 +19,7 @@ object PrefsSchema {
 }
 
 @Composable
-fun App(prefs: SharedPrefs) {
+fun App(prefs: ISharedPrefs) {
 
     var exampleString by remember { mutableStateOf(prefs.getString(PrefsSchema.EXAMPLE_STRING_KEY, PrefsSchema.EXAMPLE_STRING_DEF)) }
     var exampleBoolean by remember { mutableStateOf(prefs.getBoolean(PrefsSchema.EXAMPLE_BOOLEAN_KEY, PrefsSchema.EXAMPLE_BOOLEAN_DEF)) }
@@ -35,54 +35,52 @@ fun App(prefs: SharedPrefs) {
         changed = false
     }
 
-    Surface(
-        Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Column {
-            Text("Settings", style = MaterialTheme.typography.titleMedium)
+    MaterialTheme {
+        Surface(Modifier.fillMaxSize()) {
+            Column(Modifier.padding(16.dp)) {
+                Text("Settings", style = MaterialTheme.typography.titleMedium)
 
-            Column(
-                modifier = Modifier.padding(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                StringSetting(
-                    name = PrefsSchema.EXAMPLE_STRING_NAME,
-                    value = exampleString.toString(),
-                    onChange = {
-                        exampleString = it
-                        changed = true
-                    }
-                )
-
-                BoolSetting(
-                    name = PrefsSchema.EXAMPLE_BOOLEAN_NAME,
-                    value = exampleBoolean,
-                    onChange = {
-                        exampleBoolean = it
-                        changed = true
-                    }
-                )
-            }
-
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Button(
-                    onClick = ::save,
-                    enabled = changed
+                Column(
+                    modifier = Modifier.padding(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Text("Save")
+                    StringSetting(
+                        name = PrefsSchema.EXAMPLE_STRING_NAME,
+                        value = exampleString,
+                        onChange = {
+                            exampleString = it
+                            changed = true
+                        }
+                    )
+
+                    BoolSetting(
+                        name = PrefsSchema.EXAMPLE_BOOLEAN_NAME,
+                        value = exampleBoolean,
+                        onChange = {
+                            exampleBoolean = it
+                            changed = true
+                        }
+                    )
                 }
 
-                Button(
-                    onClick = {
-                        exampleString = PrefsSchema.EXAMPLE_STRING_DEF
-                        exampleBoolean = PrefsSchema.EXAMPLE_BOOLEAN_DEF
-
-                        save()
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Button(
+                        onClick = ::save,
+                        enabled = changed
+                    ) {
+                        Text("Save")
                     }
-                ) {
-                    Text("Reset")
+
+                    Button(
+                        onClick = {
+                            exampleString = PrefsSchema.EXAMPLE_STRING_DEF
+                            exampleBoolean = PrefsSchema.EXAMPLE_BOOLEAN_DEF
+
+                            save()
+                        }
+                    ) {
+                        Text("Reset")
+                    }
                 }
             }
         }

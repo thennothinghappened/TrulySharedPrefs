@@ -1,5 +1,9 @@
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.orca.trulysharedprefs.SharedPrefsFactory
 import org.orca.trulysharedprefs.sample.App
 import java.util.prefs.Preferences
@@ -11,8 +15,8 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         title = "TrulySharedPrefs Sample"
     ) {
-        val preferences = Preferences.userNodeForPackage(App::class.java)
-        val prefs = SharedPrefsFactory(preferences).createSharedPrefs()
+        val prefs = SharedPrefsFactory(App::class.java)
+            .createSharedPrefs()
 
         App(prefs)
     }
