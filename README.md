@@ -45,5 +45,7 @@ See the `:sample` module for a usage in Desktop and Android [Compose](https://ww
 settings menu.
 
 ## TODO
-Intending to add a module that makes it easier to work with Compose, i.e. bringing into the
+ - Intending to add a module that makes it easier to work with Compose, i.e. bringing into the
 `remember` system.
+ - Arbitrary type support with `kotlinx.serialization`, optionally.
+ - Potentially moving away from `SharedPreferences` & `Preferences` in favour of using `kotlinx.serialization` entirely?
