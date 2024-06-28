@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 group = "org.orca.trulysharedprefs"
 version = "1.1.0"
@@ -9,6 +10,11 @@ plugins {
 }
 
 kotlin {
+
+    compilerOptions {
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+    }
+
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -21,30 +27,24 @@ kotlin {
 
     jvm("desktop")
 
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs()
+
     sourceSets {
-        commonMain.dependencies {
-
-        }
-
-        androidMain.dependencies {
-
-        }
-
-        val desktopMain by getting {
-            dependencies {
-
-            }
-        }
+        val desktopMain by getting
+        val wasmJsMain by getting
     }
+
 }
 
 android {
+
     namespace = "org.orca.trulysharedprefs"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
-        targetSdk = libs.versions.android.compileSdk.get().toInt()
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
     }
 
     compileOptions {

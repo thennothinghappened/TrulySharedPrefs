@@ -1,4 +1,5 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 group = "org.orca.trulysharedprefs.sample"
 version = "1.0.0-SNAPSHOT"
@@ -25,7 +26,11 @@ kotlin {
 
     jvm("desktop")
 
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs()
+
     sourceSets {
+
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -44,6 +49,9 @@ kotlin {
                 implementation(compose.desktop.currentOs)
             }
         }
+
+        val wasmJsMain by getting
+
     }
 }
 
