@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 group = "org.orca.trulysharedprefs"
-version = "1.1.0"
+version = "1.2.0"
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
